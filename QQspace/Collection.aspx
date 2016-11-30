@@ -6,7 +6,7 @@
     <asp:LinkButton ID="say" runat="server" Text="说说" OnClick="say_Click" ></asp:LinkButton>
     <asp:LinkButton ID="dairy" runat="server" Text="日志" OnClick="dairy_Click" ></asp:LinkButton>
     <asp:Panel ID="pnsay" runat="server" Visible="false" >
-    <asp:Repeater ID="say_dairy" runat="server" OnItemCommand="say_dairy_ItemCommand" >
+    <asp:Repeater ID="say_dairy1" runat="server" OnItemCommand="say_dairy1_ItemCommand" >
         <HeaderTemplate >
             <table>
 
@@ -15,10 +15,11 @@
           <tr>
               <td>
                    <h2>
-                <%# Eval("nickname") %>
+                <%# Eval("myusername") %>收藏
                 <%#Eval("username") %>:</h2>
                 <h3> <%#Eval("say") %></h3>
               </td>
+              <td><asp:LinkButton ID="delete1" runat="server" Text="删除" CommandName="delete" CommandArgument='<%#Eval("id") %>'></asp:LinkButton></td>
           </tr>
         </ItemTemplate>
         <FooterTemplate >
@@ -27,7 +28,26 @@
     </asp:Repeater>
     </asp:Panel>
     <asp:Panel ID="pndairy" runat="server" Visible ="false" >
+        <asp:Repeater ID="say_dairy2" runat="server" OnItemCommand="say_dairy2_ItemCommand" >
+        <HeaderTemplate >
+            <table>
 
+        </HeaderTemplate>
+        <ItemTemplate >                        
+          <tr>
+              <td>
+                   <h2>
+                <%# Eval("myusername") %>收藏
+                <%#Eval("username") %>:</h2>
+                <h3> <%#Eval("dairy") %></h3>
+              </td>
+              <td><asp:LinkButton ID="delete2" runat="server" Text="删除" CommandName="delete" CommandArgument='<%#Eval("id") %>'></asp:LinkButton></td>
+          </tr>
+        </ItemTemplate>
+        <FooterTemplate >
+            </table>
+        </FooterTemplate>
+    </asp:Repeater>
 
     </asp:Panel>
 </asp:Content>
