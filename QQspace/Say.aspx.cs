@@ -15,7 +15,7 @@ public partial class Say2 : System.Web.UI.Page
         {
             if (!IsPostBack)
             {
-                string sql3 = "select * from Say where username='" + Session["name"].ToString() + "'";
+                string sql3 = "select * from Say where username='" + Session["name"].ToString() + "' order by id desc";
 
                 DataTable dt2 = mysay.select(sql3);
 

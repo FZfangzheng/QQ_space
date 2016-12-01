@@ -69,6 +69,8 @@ public partial class Register : System.Web.UI.Page
 
         string sql4 = "insert into Question values(3,'" + username + "','" + question3 + "','" + answer3 + "')";
 
+        
+
         if (((((( CompareValidator1.IsValid == true && RequiredFieldValidator2.IsValid == true) && RequiredFieldValidator3.IsValid == true) && RequiredFieldValidator4.IsValid == true)&& RequiredFieldValidator5.IsValid==true)&& RequiredFieldValidator6.IsValid == true)&& RequiredFieldValidator7.IsValid == true)
         {
             if (txtphonenumble.Text.Length == 11)
@@ -94,6 +96,8 @@ public partial class Register : System.Web.UI.Page
                             myregister.store_change(sql3);
 
                             myregister.store_change(sql4);
+
+                           
 
                             Response.Write("<script>alert('注册成功！你的用户名是" + username + "，请牢记，本弹窗只出现一次！');location='Login.aspx'</script>");
                         }

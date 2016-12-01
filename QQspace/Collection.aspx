@@ -39,7 +39,8 @@
                    <h2>
                 <%# Eval("myusername") %>收藏
                 <%#Eval("username") %>:</h2>
-                <h3> <%#Eval("dairy") %></h3>
+                  <h3><asp:Label ID="dairytitle" runat="server" Text=' <%#Eval("title") %>' Width="500"></asp:Label></h3>
+                <h3><asp:Label ID="dairycontent" runat="server" Text=' <%#Eval("dairy") %>' Width="500"></asp:Label></h3>
               </td>
               <td><asp:LinkButton ID="delete2" runat="server" Text="删除" CommandName="delete" CommandArgument='<%#Eval("id") %>'></asp:LinkButton></td>
           </tr>
