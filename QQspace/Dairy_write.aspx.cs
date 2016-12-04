@@ -33,8 +33,14 @@ public partial class Dairy_write : System.Web.UI.Page
 
         string sql = "insert into Dairy values('" + Session["name"].ToString() + "','" + title + "','" + content + "',0,'" + Session["nickname"].ToString() + "','" + time + "')";
 
-        mydairy.store_change(sql);
+        if (title != "" && content != "")
+        {
 
-        Response.Write("<script>alert('发表成功！');location='Dairy.aspx'</script>");
+            mydairy.store_change(sql);
+
+            Response.Write("<script>alert('发表成功！');location='Dairy.aspx'</script>");
+        }
+        else
+            Response.Write("<script>alert('内容不能为空！');location='Dairy.aspx'</script>");
     }
 }

@@ -29,7 +29,20 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
             if (dt.Rows.Count > 0)
             {
+                string sql0 = "update Say set photo='" + dt.Rows[0][0].ToString() + "' where username='" + Session["name"].ToString() + "'";
+
+                mycenter.store_change(sql0);
+
                 Image1.ImageUrl = dt.Rows[0][0].ToString();
+            }
+            //读取加好友信息
+            string sql1 = "select * from Friend_make where otherusername='" + Session["name"].ToString() + "'";
+
+            DataTable dt1 = mycenter.select(sql1);
+
+            if(dt1.Rows.Count > 0)
+            {
+                friendmessage.Text = dt1.Rows.Count.ToString();
             }
 
         }

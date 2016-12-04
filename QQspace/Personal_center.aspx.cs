@@ -43,6 +43,12 @@ public partial class Default3 : System.Web.UI.Page
 
                     dt2.Merge(dt1);
                 }
+                //对视图进行排序，以ID大小进行降序排序
+                DataView dv = new DataView(dt2);
+
+                dv.Sort = "id desc";
+
+                dt2 = dv.ToTable();
 
                 RptPerson.DataSource = dt2;
 
@@ -79,12 +85,22 @@ public partial class Default3 : System.Web.UI.Page
     {
         string say = saysay.Text;
 
-        string sql = "insert into Say values('" + Session["name"].ToString() + "','" + say + "',0,'" + Session["nickname"] + "')";
+        string sql0 = "select photo from Login where username='" + Session["name"].ToString() + "'";
 
-        mycenter.store_change(sql);
+        DataTable dt = mycenter.select(sql0);
 
-        Response.Write("<script>alert('发表成功！');location='Personal_center.aspx'</script>");
+        string sql = "insert into Say values('" + Session["name"].ToString() + "','" + say + "',0,'" + Session["nickname"] + "','" + dt.Rows[0][0].ToString() + "')";
+
+        if (say != "")
+        {
+            mycenter.store_change(sql);
+
+            Response.Write("<script>alert('发表成功！');location='Personal_center.aspx'</script>");
+        }
+        else
+            Response.Write("<script>alert('内容不能为空！');location='Personal_center.aspx'</script>");
     }
+
 
     protected void RptPerson_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
@@ -168,5 +184,10 @@ public partial class Default3 : System.Web.UI.Page
             else
                 Response.Write("<script>alert('不可重复收藏！')</script>");
         }
+    }
+
+    protected void RptSay_ItemCommand(object source, RepeaterCommandEventArgs e)
+    {
+
     }
 }

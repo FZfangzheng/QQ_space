@@ -10,13 +10,14 @@
          <asp:Repeater ID="RptPerson" runat="server"  OnItemDataBound="RptPerson_ItemDataBound" OnItemCommand ="RptPerson_ItemCommand" >
             <ItemTemplate>
                 <h2>
+                <img src='<%# Eval("photo") %>' runat="server" width="30" height="35" />
                 <%# Eval("nickname") %>
-                <%#Eval("username") %>:</h2>
+                <asp:LinkButton ID="friend" runat="server" Text='<%#Eval("username") %>' CommandName="Friendspace" CommandArgument='<%# Eval("username") %>'></asp:LinkButton></h2>
                 <h3> <%#Eval("say") %></h3>
-                <asp:Repeater ID="RptSay" runat="server" >
+                <asp:Repeater ID="RptSay" runat="server" OnItemCommand="RptSay_ItemCommand" >
                     <ItemTemplate>
                         <%# Eval("nickname") %>
-                        <%# Eval("username") %>:
+                        <asp:LinkButton ID="friend" runat="server" Text='<%#Eval("username") %>' CommandName="Friendspace" CommandArgument='<%# Eval("username") %>'></asp:LinkButton>
                         <%#Eval("comment") %>
                         <br />
                     </ItemTemplate>

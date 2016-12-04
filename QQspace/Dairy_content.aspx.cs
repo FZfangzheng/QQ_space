@@ -130,9 +130,15 @@ public partial class Dairy_content : System.Web.UI.Page
 
         string sql = "update Dairy set title='" + title + "',dairy='" + content + "' where id='" + Session["dairy_id"] + "'";
 
-        mydairy.store_change(sql);
+        if (title != "" && content != "")
+        {
 
-        Response.Write("<script>alert('编辑成功！');location='Dairy_content.aspx'</script>");
+            mydairy.store_change(sql);
+
+            Response.Write("<script>alert('编辑成功！');location='Dairy_content.aspx'</script>");
+        }
+        else
+            Response.Write("<script>alert('内容不能为空！');location='Dairy_content.aspx'</script>");
     }
 
     protected void btndairyback_Click(object sender, EventArgs e)

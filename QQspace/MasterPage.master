@@ -19,6 +19,7 @@
             <asp:ListItem >。。。。</asp:ListItem>
         </asp:DropDownList>
         &nbsp;<asp:LinkButton ID="friend" runat="server" PostBackUrl="~/Friend.aspx" Text="好友"></asp:LinkButton>
+        <asp:Label ID="friendmessage" runat="server" ForeColor="Red" Text=""></asp:Label>
         &nbsp;<asp:LinkButton ID="special" runat="server" PostBackUrl="~/Special.aspx" Text="特别关心"></asp:LinkButton>
         &nbsp;<asp:LinkButton ID="set" runat="server" PostBackUrl="~/Set.aspx" Text="设置权限"></asp:LinkButton>
         &nbsp;<asp:LinkButton ID="collect" runat="server" PostBackUrl="~/Collection.aspx" Text="收藏"></asp:LinkButton>

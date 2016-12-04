@@ -55,11 +55,21 @@ public partial class Say2 : System.Web.UI.Page
     {
         string say = saysay.Text;
 
-        string sql = "insert into Say values('" + Session["name"].ToString() + "','" + say + "',0,'" + Session["nickname"] + "')";
+        string sql0 = "select photo from Login where username='" + Session["name"].ToString() + "'";
 
-        mysay.store_change(sql);
+        DataTable dt = mysay.select(sql0);
 
-        Response.Write("<script>alert('发表成功！');location='Personal_center.aspx'</script>");
+        string sql = "insert into Say values('" + Session["name"].ToString() + "','" + say + "',0,'" + Session["nickname"] + "','" + dt.Rows[0][0].ToString() + "')";
+
+        if (say != "")
+        {
+
+            mysay.store_change(sql);
+
+            Response.Write("<script>alert('发表成功！');location='Say.aspx'</script>");
+        }
+        else
+            Response.Write("<script>alert('内容不能为空！');location='Say.aspx'</script>");
     }
 
     protected void RptPerson_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -82,7 +92,7 @@ public partial class Say2 : System.Web.UI.Page
 
             mysay.store_change(sql1);
 
-            Response.Write("<script>window.location='Personal_center.aspx'</script>");
+            Response.Write("<script>window.location='Say.aspx'</script>");
         }
         if (e.CommandName == "Reply")
         {
@@ -96,7 +106,7 @@ public partial class Say2 : System.Web.UI.Page
 
             mysay.store_change(sql);
 
-            Response.Write("<script>window.location='Personal_center.aspx'</script>");
+            Response.Write("<script>window.location='Say.aspx'</script>");
         }
         if (e.CommandName == "Delete")
         {
@@ -106,7 +116,7 @@ public partial class Say2 : System.Web.UI.Page
 
             mysay.store_change(sql);
 
-            Response.Write("<script>window.location='Personal_center.aspx'</script>");
+            Response.Write("<script>window.location='Say.aspx'</script>");
         }
         if (e.CommandName == "Collect")
         {
@@ -126,7 +136,7 @@ public partial class Say2 : System.Web.UI.Page
 
                 mysay.store_change(sql2);
 
-                Response.Write("<script>alert('收藏成功！');location='Personal_center.aspx'</script>");
+                Response.Write("<script>alert('收藏成功！');location='Say.aspx'</script>");
             }
             else
                 Response.Write("<script>alert('不可重复收藏！')</script>");
