@@ -21,12 +21,14 @@ public partial class Login : System.Web.UI.Page
 
         string password = EnPswdStr;
 
-        string sql = "select * from Login where username='" + username.Replace("'","''") + "'and password='" + password.Replace("'","''") + "'";
-
+        //string sql = "select * from Login where username='" + username.Replace("'","''") + "'and password='" + password.Replace("'","''") + "'";
+        string sql = "select * from Login where username =@username and password=@password";
+        //string sql = "select * from Login where username='" + username + "'and password='" + password + "'";
         try
         {
-            DataTable table1 = mylogin.select(sql);
-
+            //DataTable table1 = mylogin.select(sql);
+            DataTable table1 = mylogin.store_change_parameterization(sql, "@username", "@password", username, password);
+            //DataTable table1 = mylogin.select(sql);
             if (table1.Rows.Count > 0)
             {
                 //生成的验证码被保存到session中

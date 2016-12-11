@@ -77,6 +77,14 @@
               <asp:TextBox ID ="txtphonenumble" runat ="server" onkeyup="this.value=this.value.replace(/\D/g,'')"></asp:TextBox>
           </td>
         </tr>
+         <tr>
+            <td>
+                 邮箱*：</td>
+          <td>
+              <asp:TextBox ID ="txtmailbox" runat ="server" ></asp:TextBox>
+               <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat ="server" ErrorMessage ="邮箱不能为空！一些操作会发邮件确认！" ControlToValidate ="txtmailbox" ForeColor ="Red"></asp:RequiredFieldValidator> <br />  
+          </td>
+        </tr>
         <tr>
             <td>
                 密保问题1*：

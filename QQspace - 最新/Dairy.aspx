@@ -34,7 +34,7 @@
         转<asp:TextBox ID="txtJump" Text="1" runat="server" Width="16px" onkeyup="this.value=this.value.replace(/\D/g,'')"></asp:TextBox>
          <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat ="server" ControlToValidate ="txtJump" ></asp:RequiredFieldValidator> 
         <asp:Button ID="btnJump" runat="server" Text="Go"  OnClick="btnJump_Click"/>
-         <asp:Button ID="btnback" runat="server" Text="返回" PostBackUrl="~/Personal_center.aspx" />
+         <asp:Button ID="btnback" runat="server" Text="返回" PostBackUrl="~/Homepage.aspx" />
 
 </asp:Content>
 

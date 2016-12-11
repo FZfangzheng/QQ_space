@@ -100,7 +100,14 @@ public partial class Dairy_write : System.Web.UI.Page
         if (dt.Rows.Count == 0)
 
         {
+
+            string sql2 = "delete from Dairy_drafts where username='" + Session["name"].ToString() + "'";
+
+            mydairy.store_change(sql2);
+
             mydairy.store_change(sql);
+
+           
 
             Response.Write("<script>alert('已存至草稿箱，下次写日志自动跳出内容！')</script>");
         }

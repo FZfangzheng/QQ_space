@@ -6,7 +6,7 @@
     <script type="text/javascript" charset="utf-8" src="../ueditor/lang/zh-cn/zh-cn.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-     <asp:TextBox ID="txttitle" runat="server" Width="500"></asp:TextBox><br />
+     <asp:TextBox ID="txttitle" runat="server" Width="500" MaxLength="50"></asp:TextBox><br />
         <div>内容：<br />
             <script id="myEditor" type="text/plain"></script>
             <textarea id="myEditor" name="myEditor" runat="server" onblur="setUeditor()" style="width: 1030px;

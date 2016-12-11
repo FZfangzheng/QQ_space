@@ -15,11 +15,7 @@ public partial class Dairy2 : System.Web.UI.Page
         {
             if (Session["tourist"] != null)
             {
-                write_dairy.Visible = false;
-
-               // LinkButton link = e.id=("delete") as LinkButton;
-
-                //link.Visible = false;
+                write_dairy.Visible = false;   
 
             }
             if (!IsPostBack)

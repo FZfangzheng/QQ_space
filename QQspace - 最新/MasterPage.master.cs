@@ -146,7 +146,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
             lballtourist.Text = dt2.Rows.Count.ToString();
 
-            string time = DateTime.Now.ToString().Substring(0, 9);
+            string time = DateTime.Now.ToShortDateString().ToString();
 
             string sql3 = "select * from Tourist where username='" + Session["name"].ToString() + "' and time like'%" + time + "%'";
 

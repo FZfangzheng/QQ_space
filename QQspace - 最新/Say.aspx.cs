@@ -89,11 +89,12 @@ public partial class Say2 : System.Web.UI.Page
         DataTable dt = mysay.select(sql0);
 
         string sql = "insert into Dynamic values('" + Session["name"].ToString() + "','" + Session["nickname"] + "','" + dt.Rows[0][0].ToString() + "','" + say + "','','','','','say',0,'" + DateTime.Now.ToString() + "',',','','','')";
-
+       
         if (say != "")
         {
 
             mysay.store_change(sql);
+           
 
             mysay.rank(Session["name"].ToString(), 2);
 
@@ -159,9 +160,9 @@ public partial class Say2 : System.Web.UI.Page
             string rp = reply2.Text;
 
             string sql = "insert into Dynamic_comment values('" + id + "','" + Session["name"].ToString() + "','" + Session["nickname"].ToString() + "','" + rp + "','say_comment','" + DateTime.Now.ToString() + "')";
-
+          
             mysay.store_change(sql);
-
+         
             mysay.rank(Session["name"].ToString(), 1);
 
             Response.Write("<script>window.location='Say.aspx'</script>");
@@ -184,17 +185,18 @@ public partial class Say2 : System.Web.UI.Page
 
             DataTable dt = mysay.select(sql1);
 
-            string sql3 = "select * from Collection_say where say='" + dt.Rows[0][2].ToString() + "' and myusername='" + Session["name"] + "'";
+            string sql3 = "select * from Collection_dynamic where say='" + dt.Rows[0][4].ToString() + "' and myusername='" + Session["name"] + "' and title='" + dt.Rows[0][5].ToString() + "'and dairy='" + dt.Rows[0][6].ToString() + "'and album='" + dt.Rows[0][7].ToString() + "' and photo='" + dt.Rows[0][8].ToString() + "'and printdairy='" + dt.Rows[0][9].ToString() + "' and printphoto='" + dt.Rows[0][10].ToString() + "'";
 
             DataTable dt1 = mysay.select(sql3);
-
+            //之前没收藏过
             if (dt1.Rows.Count == 0)
             {
-                string sql2 = "insert into Collection_say values('" + Session["name"].ToString() + "','" + dt.Rows[0][1].ToString() + "','" + dt.Rows[0][4].ToString() + "')";
+                string sql2 = "insert into Collection_dynamic values('" + Session["name"].ToString() + "','" + dt.Rows[0][1].ToString() + "','" + dt.Rows[0][4].ToString() + "','" + dt.Rows[0][5].ToString() + "','" + dt.Rows[0][6].ToString() + "','" + dt.Rows[0][7].ToString() + "','" + dt.Rows[0][8].ToString() + "','" + dt.Rows[0][9].ToString() + "','" + dt.Rows[0][10].ToString() + "')";
 
                 mysay.store_change(sql2);
 
-                Response.Write("<script>alert('收藏成功！');location='Say.aspx'</script>");
+                Response.Write("<script>alert('收藏成功！');location='Homepage.aspx'</script>");
+
             }
             else
                 Response.Write("<script>alert('不可重复收藏！')</script>");
@@ -211,69 +213,10 @@ public partial class Say2 : System.Web.UI.Page
 
             string sql1 = "select * from Authority where username='" + Session["tourist"].ToString() + "' and otherusername='" + Session["name"].ToString() + "'";
 
-            DataTable dt1 = mysay.select(sql1);
-
-            if (dt1.Rows.Count == 0)
+            int a = mysay.visit(sql1, Session["tourist"].ToString(), Session["touristnickname"].ToString(), Session["name"].ToString(), Session["nickname"].ToString());
+            if (a == 1)
             {
-                //访问陌生人权限查看
-                string sql4 = "select authority from Login where username='" + Session["tourist"].ToString() + "'";
-
-                DataTable dt4 = mysay.select(sql4);
-                //等于零允许陌生人访问
-                if (Convert.ToInt32(dt4.Rows[0][0].ToString()) == 0)
-                {
-                    if (Session["name"].ToString() != Session["tourist"].ToString())
-                    {
-                        string sql2 = "select * from Login where username='" + Session["name"].ToString() + "'";
-
-                        DataTable dt2 = mysay.select(sql2);
-
-                        string visitway = dt2.Rows[0][9].ToString() + "访问你的空间";
-
-                        string sql3 = "insert into Tourist values('" + Session["tourist"].ToString() + "','" + dt2.Rows[0][8].ToString() + "','" + Session["name"].ToString() + "','" + Session["nickname"].ToString() + "','" + visitway + "','" + DateTime.Now.ToString() + "')";
-
-                        mysay.store_change(sql3);
-                    }
-                    Response.Write("<script>window.location='Homepage.aspx'</script>");
-                }
-                //否则判断是否为好友或者自己
-                else
-                {
-                    string sql5 = "select * from Friend where myusername='" + Session["tourist"].ToString() + "' and otherusername='" + Session["name"].ToString() + "'";
-
-                    DataTable dt5 = mysay.select(sql5);
-
-                    if (dt5.Rows.Count == 0)
-                    {
-                        //是不是自己
-                        if (Session["name"].ToString() == Session["tourist"].ToString())
-                        {
-                            Response.Write("<script>window.location='Homepage.aspx'</script>");
-                        }
-                        else
-                        {
-                            Session["tourist"] = null;
-
-                            Session["touristnickname"] = null;
-
-                            Response.Write("<script>alert('你没有访问权限！')</script>");
-                        }
-                    }
-                    else
-                    {
-                        string sql6 = "select * from Login where username='" + Session["name"].ToString() + "'";
-
-                        DataTable dt6 = mysay.select(sql6);
-
-                        string visitway = dt6.Rows[0][9].ToString() + "访问你的空间";
-
-                        string sql7 = "insert into Tourist values('" + Session["tourist"].ToString() + "','" + dt6.Rows[0][8].ToString() + "','" + Session["name"].ToString() + "','" + Session["nickname"].ToString() + "','" + visitway + "','" + DateTime.Now.ToString() + "')";
-
-                        mysay.store_change(sql7);
-
-                        Response.Write("<script>window.location='Homepage.aspx'</script>");
-                    }
-                }
+                Response.Write("<script>window.location='Homepage.aspx'</script>");
             }
             else
             {
@@ -301,69 +244,10 @@ public partial class Say2 : System.Web.UI.Page
 
             string sql1 = "select * from Authority where username='" + Session["tourist"].ToString() + "' and otherusername='" + Session["name"].ToString() + "'";
 
-            DataTable dt1 = mysay.select(sql1);
-
-            if (dt1.Rows.Count == 0)
+            int a = mysay.visit(sql1, Session["tourist"].ToString(), Session["touristnickname"].ToString(), Session["name"].ToString(), Session["nickname"].ToString());
+            if (a == 1)
             {
-                //访问陌生人权限查看
-                string sql4 = "select authority from Login where username='" + Session["tourist"].ToString() + "'";
-
-                DataTable dt4 = mysay.select(sql4);
-                //等于零允许陌生人访问
-                if (Convert.ToInt32(dt4.Rows[0][0].ToString()) == 0)
-                {
-                    if (Session["name"].ToString() != Session["tourist"].ToString())
-                    {
-                        string sql2 = "select * from Login where username='" + Session["name"].ToString() + "'";
-
-                        DataTable dt2 = mysay.select(sql2);
-
-                        string visitway = dt2.Rows[0][9].ToString() + "访问你的空间";
-
-                        string sql3 = "insert into Tourist values('" + Session["tourist"].ToString() + "','" + dt2.Rows[0][8].ToString() + "','" + Session["name"].ToString() + "','" + Session["nickname"].ToString() + "','" + visitway + "','" + DateTime.Now.ToString() + "')";
-
-                        mysay.store_change(sql3);
-                    }
-                    Response.Write("<script>window.location='Homepage.aspx'</script>");
-                }
-                //否则判断是否为好友或者自己
-                else
-                {
-                    string sql5 = "select * from Friend where myusername='" + Session["tourist"].ToString() + "' and otherusername='" + Session["name"].ToString() + "'";
-
-                    DataTable dt5 = mysay.select(sql5);
-
-                    if (dt5.Rows.Count == 0)
-                    {
-                        //是不是自己
-                        if (Session["name"].ToString() == Session["tourist"].ToString())
-                        {
-                            Response.Write("<script>window.location='Homepage.aspx'</script>");
-                        }
-                        else
-                        {
-                            Session["tourist"] = null;
-
-                            Session["touristnickname"] = null;
-
-                            Response.Write("<script>alert('你没有访问权限！')</script>");
-                        }
-                    }
-                    else
-                    {
-                        string sql6 = "select * from Login where username='" + Session["name"].ToString() + "'";
-
-                        DataTable dt6 = mysay.select(sql6);
-
-                        string visitway = dt6.Rows[0][9].ToString() + "访问你的空间";
-
-                        string sql7 = "insert into Tourist values('" + Session["tourist"].ToString() + "','" + dt6.Rows[0][8].ToString() + "','" + Session["name"].ToString() + "','" + Session["nickname"].ToString() + "','" + visitway + "','" + DateTime.Now.ToString() + "')";
-
-                        mysay.store_change(sql7);
-
-                        Response.Write("<script>window.location='Homepage.aspx'</script>");
-                    }
-                }
+                Response.Write("<script>window.location='Homepage.aspx'</script>");
             }
             else
             {
@@ -373,7 +257,6 @@ public partial class Say2 : System.Web.UI.Page
 
                 Response.Write("<script>alert('你没有访问权限！')</script>");
             }
-
         }
     }
 }

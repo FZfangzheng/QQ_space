@@ -139,10 +139,10 @@ public partial class Dairy_content : System.Web.UI.Page
     {
         string comment = this.comment.Text;
 
-        string sql = "insert into Dairy_comment values('" + Session["dairy_id"].ToString() + "','" + Session["nickname"].ToString() + "','" + Session["name"].ToString() + "','" + comment + "')";
-
-        mydairy.store_change(sql);
-
+         string sql = "insert into Dairy_comment values('" + Session["dairy_id"].ToString() + "','" + Session["nickname"].ToString() + "','" + Session["name"].ToString() + "','" + comment + "')";
+        
+         mydairy.store_change(sql);
+    
         mydairy.rank(Session["name"].ToString(), 1);
 
         Response.Write("<script>alert('发表成功！');location='Dairy_content.aspx'</script>");

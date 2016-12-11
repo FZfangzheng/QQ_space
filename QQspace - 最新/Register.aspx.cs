@@ -49,6 +49,8 @@ public partial class Register : System.Web.UI.Page
 
         string phonenumble = txtphonenumble.Text;
 
+        string mailbox = txtmailbox.Text;
+
         string question1 = DropDownList.SelectedValue;
 
         string answer1 = txtanswer.Text;
@@ -63,7 +65,7 @@ public partial class Register : System.Web.UI.Page
 
         string photo = "~/Images/" + "t011ea4d03abdd5760e.jpg";
 
-        string sql = "insert into Login values('" + username + "','" + password + "','" + nickname + "','" + sex + "','" + age + "','" + location + "','" + phonenumble + "','" + photo + "','',0,0)";
+        string sql = "insert into Login values('" + username + "','" + password + "','" + nickname + "','" + sex + "','" + age + "','" + location + "','" + phonenumble + "','" + photo + "','',0,0,'" + mailbox + "')";
 
         string sql2 = "insert into Question values(1,'" + username + "','" + question1 + "','" + answer1 + "')";
 
@@ -73,7 +75,7 @@ public partial class Register : System.Web.UI.Page
 
         
 
-        if (((((( CompareValidator1.IsValid == true && RequiredFieldValidator2.IsValid == true) && RequiredFieldValidator3.IsValid == true) && RequiredFieldValidator4.IsValid == true)&& RequiredFieldValidator5.IsValid==true)&& RequiredFieldValidator6.IsValid == true)&& RequiredFieldValidator7.IsValid == true)
+        if ((((((( CompareValidator1.IsValid == true && RequiredFieldValidator2.IsValid == true) && RequiredFieldValidator3.IsValid == true) && RequiredFieldValidator4.IsValid == true)&& RequiredFieldValidator5.IsValid==true)&& RequiredFieldValidator6.IsValid == true)&& RequiredFieldValidator7.IsValid == true)&& RequiredFieldValidator9.IsValid==true)
         {
             if (txtphonenumble.Text.Length == 11)
             {                            

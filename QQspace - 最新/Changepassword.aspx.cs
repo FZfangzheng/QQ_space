@@ -9,13 +9,14 @@ using System.Web.UI.WebControls;
 public partial class Changepassword : System.Web.UI.Page
 {
     Class1 mychange = new Class1();
+    
     protected void Page_Load(object sender, EventArgs e)
     {
 
     }
 
     protected void btnchangpassword_Click(object sender, EventArgs e)
-    {
+    {//满足限制条件后进行下一步
         if(RequiredFieldValidator1.IsValid==true && RequiredFieldValidator2.IsValid==true && RequiredFieldValidator3.IsValid==true && CompareValidator1.IsValid==true )
         {
             string oldpassword = mychange.md5(password.Text, 16);
@@ -31,6 +32,8 @@ public partial class Changepassword : System.Web.UI.Page
             if (dt.Rows.Count > 0)
             {
                 mychange.store_change(sql1);
+                //发送邮件至注册时的邮箱
+                Library.DAL.Send.Sendemails("17806282596@163.com", dt.Rows[0][12].ToString(), "修改密码", "你的密码修改了,如果不是本人操作请迅速使用密码问题或手机更换密码");
 
                 Session["name"] = null;
 

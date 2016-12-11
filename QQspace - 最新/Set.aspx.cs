@@ -110,7 +110,7 @@ public partial class Set2 : System.Web.UI.Page
 
         DataTable dt = myset.select(sql);
 
-        if(Convert.ToInt32(dt.Rows[0][0].ToString()) < 25)
+        if(Convert.ToInt32(dt.Rows[0][0].ToString()) <= 25)
         {
             Response.Write("<script>alert('你的空间等级过低，无法使用个性化功能！')</script>");
         }
