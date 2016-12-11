@@ -124,7 +124,7 @@ public partial class Set2 : System.Web.UI.Page
 
     protected void btnpersonalset_Click(object sender, EventArgs e)
     {
-        string sql = "update Login set visitway='" + ddlpersonalset.Text + "'";
+        string sql = "update Login set visitway='" + ddlpersonalset.Text + "' where username='" + Session["name"].ToString() + "'";
 
         myset.store_change(sql);
 
